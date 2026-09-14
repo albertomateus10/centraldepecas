@@ -1,4 +1,4 @@
-// Lista dos 9 botões com seus nomes e links exatos
+// Lista dos botões com seus nomes e links exatos
 const SYSTEMS = [
   {
     id: 1,
@@ -44,6 +44,11 @@ const SYSTEMS = [
     id: 9,
     name: "Admin da GoParts",
     url: "https://admin.goparts.com.br/"
+  },
+  {
+    id: 10,
+    name: "Catalogo de Peças - Epair",
+    url: "https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP"
   }
 ];
 
@@ -63,11 +68,16 @@ function renderButtons() {
   `).join("");
 }
 
-// Atalhos do teclado: números 1 a 9 abrem direto o sistema
+// Atalhos do teclado: números 1 a 9 abrem direto o sistema (tecla 0 abre o 10)
 window.addEventListener("keydown", (e) => {
-  const num = parseInt(e.key, 10);
-  if (num >= 1 && num <= 9) {
+  if (e.key >= "1" && e.key <= "9") {
+    const num = parseInt(e.key, 10);
     const target = SYSTEMS.find(s => s.id === num);
+    if (target) {
+      window.open(target.url, "_blank", "noopener,noreferrer");
+    }
+  } else if (e.key === "0") {
+    const target = SYSTEMS.find(s => s.id === 10);
     if (target) {
       window.open(target.url, "_blank", "noopener,noreferrer");
     }
