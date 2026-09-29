@@ -47,12 +47,12 @@ const SYSTEMS = [
   },
   {
     id: 10,
-    name: "Catalogo de Peças - Epair",
+    name: "Catálogo de Peças - Epair",
     url: "https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP"
   },
   {
     id: 11,
-    name: "Catalogo de Acessórios",
+    name: "Catálogo de Acessórios",
     url: "https://catalogodeacessorios-sm.web.app/"
   }
 ];
@@ -63,7 +63,6 @@ const buttonsGrid = document.getElementById("buttonsGrid");
 function renderButtons() {
   buttonsGrid.innerHTML = SYSTEMS.map(item => `
     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-system" title="Abrir ${item.name}">
-      <span class="btn-index">${item.id}</span>
       <span class="btn-title">${item.name}</span>
       <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <line x1="7" y1="17" x2="17" y2="7"/>
