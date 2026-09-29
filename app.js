@@ -49,6 +49,11 @@ const SYSTEMS = [
     id: 10,
     name: "Catalogo de Peças - Epair",
     url: "https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP"
+  },
+  {
+    id: 11,
+    name: "Catalogo de Acessórios",
+    url: "https://catalogodeacessorios-sm.web.app/"
   }
 ];
 
