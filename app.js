@@ -54,6 +54,11 @@ const SYSTEMS = [
     id: 11,
     name: "Catálogo de Acessórios",
     url: "https://catalogodeacessorios-sm.web.app/"
+  },
+  {
+    id: 12,
+    name: "Abastecer as Filiais",
+    url: "https://albertomateus10.github.io/pecasfiliais/"
   }
 ];
 
