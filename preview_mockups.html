@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockups Executivos Avançados - Central de Peças</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #080c14;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Barra Superior Fixa de Seleção de Mockups */
+    .mockup-controller {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 17, 30, 0.95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .controller-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-review {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .controller-title h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .tab-pills {
+      display: flex;
+      background: rgba(22, 30, 49, 0.85);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 7px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+    }
+
+    .tab-btn.active.btn-rosso {
+      background: #dc2626;
+      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.4);
+    }
+
+    .tab-btn.active.btn-cad {
+      background: #0d9488;
+      box-shadow: 0 2px 10px rgba(13, 148, 136, 0.4);
+    }
+
+    .tab-btn.active.btn-nordic {
+      background: #475569;
+      box-shadow: 0 2px 10px rgba(71, 85, 105, 0.4);
+    }
+
+    /* Container de visualização */
+    .mockup-viewport {
+      flex: 1;
+      position: relative;
+    }
+
+    .mockup-view {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      min-height: calc(100vh - 65px);
+    }
+
+    .mockup-view.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ====================================================================
+       MOCKUP 1: DARK BLUEPRINT (Cockpit Automotivo de Engenharia)
+       ==================================================================== */
+    .m1-wrapper {
+      background: radial-gradient(circle at 50% 0%, #172554 0%, #0b1120 40%, #030712 100%);
+      color: #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 24px 60px;
+    }
+
+    .m1-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+
+    .tech-bg-piece {
+      position: absolute;
+      opacity: 0.07;
+      pointer-events: none;
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+      animation: floatSlow 20s infinite ease-in-out alternate;
+    }
+
+    .tech-bg-piece.p1 {
+      top: 5%;
+      left: -40px;
+      width: 320px;
+      height: 320px;
+    }
+
+    .tech-bg-piece.p2 {
+      bottom: 5%;
+      right: -50px;
+      width: 420px;
+      height: 420px;
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes floatSlow {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-20px) rotate(8deg); }
+    }
+
+    .m1-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .m1-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .m1-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .m1-logo-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .m1-titles h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .m1-titles p {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      margin-top: 3px;
+    }
+
+    .m1-status-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 18px;
+      border-radius: 100px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .m1-category-group {
+      margin-bottom: 32px;
+    }
+
+    .m1-category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 14px;
+    }
+
+    .m1-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .m1-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.85));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    .m1-card-part-bg {
+      position: absolute;
+      right: -8px;
+      bottom: -12px;
+      width: 78px;
+      height: 78px;
+      opacity: 0.12;
+      color: #60a5fa;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      transform: rotate(-10deg);
+    }
+
+    .m1-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(96, 165, 250, 0.4);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25), 0 0 15px rgba(59, 130, 246, 0.15);
+    }
+
+    .m1-card:hover .m1-card-part-bg {
+      opacity: 0.28;
+      transform: rotate(0deg) scale(1.1);
+      color: #93c5fd;
+    }
+
+    .m1-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m1-key-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 7px;
+      color: #94a3b8;
+    }
+
+    .m1-card:hover .m1-key-badge {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    }
+
+    .m1-card-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    .m1-card-desc {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .m1-card-arrow {
+      color: #475569;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.2s ease;
+    }
+
+    .m1-card:hover .m1-card-arrow {
+      color: #60a5fa;
+      transform: translateX(3px) translateY(-3px);
+    }
+
+    /* ====================================================================
+       MOCKUP 4: ROSSO CORSA & CARBON (FLAGSHIP STELLANTIS / ESPORTIVO LUXO)
+       ==================================================================== */
+    .m4-wrapper {
+      background: #090a0f;
+      color: #f8fafc;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 24px 60px;
+    }
+
+    /* Efeito de textura sutil de fibra de carbono */
+    .m4-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(220, 38, 38, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.05) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 2px, transparent 2px, transparent 4px);
+      pointer-events: none;
+    }
+
+    .m4-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .m4-header {
+      background: linear-gradient(135deg, rgba(20, 22, 30, 0.95), rgba(12, 14, 20, 0.95));
+      border: 1px solid rgba(220, 38, 38, 0.25);
+      border-left: 5px solid #dc2626;
+      border-radius: 18px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    /* Desenho de Virabrequim com Bielas em marca d'água técnica */
+    .m4-header-crankshaft {
+      position: absolute;
+      right: 20px;
+      top: -20px;
+      width: 320px;
+      height: 180px;
+      opacity: 0.09;
+      pointer-events: none;
+      color: #ef4444;
+    }
+
+    .m4-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .m4-emblem {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #b91c1c, #dc2626);
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .m4-title h1 {
+      font-size: 1.95rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .m4-badge-tag {
+      background: rgba(220, 38, 38, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .m4-title p {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .m4-quick-stats {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .m4-stat-item {
+      text-align: right;
+    }
+
+    .m4-stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .m4-stat-lbl {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .m4-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .m4-card {
+      background: linear-gradient(135deg, #131722, #0d1017);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      text-decoration: none;
+      color: #f8fafc;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 146px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .m4-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #dc2626, transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .m4-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(220, 38, 38, 0.5);
+      box-shadow: 0 12px 28px rgba(220, 38, 38, 0.15), 0 0 15px rgba(220, 38, 38, 0.1);
+    }
+
+    .m4-card:hover::after {
+      opacity: 1;
+    }
+
+    .m4-card-part-art {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      width: 74px;
+      height: 74px;
+      opacity: 0.1;
+      color: #ef4444;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .m4-card:hover .m4-card-part-art {
+      opacity: 0.28;
+      transform: scale(1.12) rotate(-6deg);
+    }
+
+    .m4-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .m4-key {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .m4-card:hover .m4-key {
+      background: #dc2626;
+      color: #fff;
+      border-color: #ef4444;
+    }
+
+    .m4-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m4-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .m4-card-sub {
+      font-size: 0.73rem;
+      color: #94a3b8;
+    }
+
+    .m4-card-arrow {
+      color: #64748b;
+      width: 16px;
+      height: 16px;
+      transition: all 0.2s;
+    }
+
+    .m4-card:hover .m4-card-arrow {
+      color: #ef4444;
+      transform: translateX(3px) translateY(-3px);
+    }
+
+    /* ====================================================================
+       MOCKUP 5: PRECISION CAD & WIREFRAME (P&D / ENGENHARIA AUTOMOTIVA)
+       ==================================================================== */
+    .m5-wrapper {
+      background: #061114;
+      color: #99f6e4;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 24px 60px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .m5-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(13, 148, 136, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13, 148, 136, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .m5-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .m5-header {
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      background: rgba(10, 25, 30, 0.85);
+      border-radius: 12px;
+      padding: 22px 28px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 0 20px rgba(13, 148, 136, 0.15);
+    }
+
+    .m5-header-title h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #2dd4bf;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .m5-header-title p {
+      font-size: 0.8rem;
+      color: #5eead4;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    .m5-cad-coords {
+      font-size: 0.72rem;
+      color: #14b8a6;
+      background: rgba(13, 148, 136, 0.12);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+
+    .m5-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .m5-card {
+      background: rgba(9, 29, 35, 0.7);
+      border: 1px solid rgba(20, 184, 166, 0.25);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: #ccfbf1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .m5-card:hover {
+      background: rgba(13, 148, 136, 0.18);
+      border-color: #2dd4bf;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(45, 212, 191, 0.25);
+    }
+
+    .m5-card-part-bg {
+      position: absolute;
+      right: -5px;
+      bottom: -10px;
+      width: 70px;
+      height: 70px;
+      opacity: 0.15;
+      color: #2dd4bf;
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .m5-card:hover .m5-card-part-bg {
+      opacity: 0.35;
+      transform: scale(1.15);
+    }
+
+    .m5-card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m5-index-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #14b8a6;
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 148, 136, 0.1);
+    }
+
+    .m5-card:hover .m5-index-tag {
+      background: #14b8a6;
+      color: #042f2e;
+    }
+
+    .m5-card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #f0fdfa;
+      letter-spacing: -0.01em;
+    }
+
+    .m5-card-desc {
+      font-size: 0.68rem;
+      color: #5eead4;
+      opacity: 0.75;
+      margin-top: 2px;
+    }
+
+    /* ====================================================================
+       MOCKUP 6: NORDIC MINIMAL LUXURY (CLEAN & EXECUTIVO PREMIUM)
+       ==================================================================== */
+    .m6-wrapper {
+      background: #f1f5f9;
+      color: #1e293b;
+      position: relative;
+      overflow: hidden;
+      padding: 44px 24px 60px;
+    }
+
+    .m6-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .m6-header {
+      margin-bottom: 40px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 24px;
+    }
+
+    .m6-titles h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+    }
+
+    .m6-titles p {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-top: 6px;
+      max-width: 600px;
+    }
+
+    .m6-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .m6-meta-pill {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .m6-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .m6-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 22px;
+      text-decoration: none;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 155px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .m6-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+      border-color: #0f172a;
+    }
+
+    .m6-part-watermark {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 64px;
+      height: 64px;
+      opacity: 0.08;
+      color: #0f172a;
+      transition: all 0.3s;
+    }
+
+    .m6-card:hover .m6-part-watermark {
+      opacity: 0.2;
+      transform: scale(1.15);
+    }
+
+    .m6-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .m6-shortcut-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      padding: 4px 9px;
+      border-radius: 8px;
+    }
+
+    .m6-card:hover .m6-shortcut-badge {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .m6-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m6-card-footer {
+      font-size: 0.76rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ====================================================================
+       RODAPÉ INFORMATIVO
+       ==================================================================== */
+    .comparison-drawer {
+      background: #080c14;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px;
+      color: #94a3b8;
+    }
+
+    .drawer-content {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .drawer-box {
+      background: rgba(22, 30, 49, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .drawer-box h4 {
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .drawer-box p {
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .drawer-box .highlight {
+      color: #60a5fa;
+      font-weight: 700;
+    }
+    .drawer-box .highlight-red {
+      color: #f87171;
+      font-weight: 700;
+    }
+    .drawer-box .highlight-teal {
+      color: #2dd4bf;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Fixa de Controle para Alternar entre os 6 Mockups -->
+  <header class="mockup-controller">
+    <div class="controller-title">
+      <span class="badge-review">Diretoria Executiva</span>
+      <h2>Mockups: Central de Peças</h2>
+    </div>
+
+    <div class="tab-pills">
+      <button class="tab-btn active" onclick="switchMockup(1)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        1. Dark Blueprint
+      </button>
+      <button class="tab-btn btn-rosso" onclick="switchMockup(4)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        4. Rosso Corsa & Carbon (Novo!)
+      </button>
+      <button class="tab-btn btn-cad" onclick="switchMockup(5)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        5. Precision CAD (Novo!)
+      </button>
+      <button class="tab-btn btn-nordic" onclick="switchMockup(6)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        6. Nordic Luxury (Novo!)
+      </button>
+      <button class="tab-btn" onclick="switchMockup(2)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        2. Executive Clean
+      </button>
+      <button class="tab-btn" onclick="switchMockup(3)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
+        3. Dynamic Hub
+      </button>
+    </div>
+  </header>
+
+  <main class="mockup-viewport">
+
+    <!-- ================================================================== -->
+    <!-- MOCKUP 4 (NOVO): ROSSO CORSA & CARBON                              -->
+    <!-- ================================================================== -->
+    <div id="mockup4" class="mockup-view m4-wrapper">
+      <div class="m4-container">
+        
+        <!-- Header Flagship Esportivo / Stellantis -->
+        <header class="m4-header">
+          <!-- Ilustração do Virabrequim com Bielas em corte técnico -->
+          <svg class="m4-header-crankshaft" viewBox="0 0 300 150" fill="none" stroke="currentColor" stroke-width="1.5">
+            <!-- Eixo do Virabrequim -->
+            <line x1="20" y1="75" x2="280" y2="75" stroke-dasharray="6 3"/>
+            <!-- Munhões e Contrapesos -->
+            <rect x="40" y="50" width="30" height="50" rx="4" fill="rgba(220, 38, 38, 0.1)"/>
+            <rect x="110" y="30" width="30" height="90" rx="4" fill="rgba(220, 38, 38, 0.15)"/>
+            <rect x="180" y="50" width="30" height="50" rx="4" fill="rgba(220, 38, 38, 0.1)"/>
+            <rect x="230" y="30" width="30" height="90" rx="4" fill="rgba(220, 38, 38, 0.15)"/>
+            <!-- Bielas ascendentes e descendentes -->
+            <path d="M55 50 L55 20 L75 20 L75 50 Z"/>
+            <circle cx="65" cy="15" r="8"/>
+            <path d="M195 50 L195 20 L215 20 L215 50 Z"/>
+            <circle cx="205" cy="15" r="8"/>
+          </svg>
+
+          <div class="m4-brand-wrap">
+            <div class="m4-emblem">
+              <!-- Ícone de Engrenagem + Pistão Esportivo -->
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </div>
+            <div class="m4-title">
+              <h1>Central de Peças <span class="m4-badge-tag">ENTERPRISE HUB</span></h1>
+              <p>Portal Unificado de Operações de Pós-Venda, Garantia & Logística</p>
+            </div>
+          </div>
+
+          <div class="m4-quick-stats">
+            <div class="m4-stat-item">
+              <div class="m4-stat-val">13</div>
+              <div class="m4-stat-lbl">Módulos Online</div>
+            </div>
+            <div class="m4-stat-item" style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
+              <div class="m4-stat-val" style="color: #ef4444;">100%</div>
+              <div class="m4-stat-lbl">Conectividade</div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Grade com 12 Cards Estilo Carbon -->
+        <div class="m4-grid">
+          
+          <!-- 1. Sugestão de Compra (Pistão de Corrida Forjado) -->
+          <a href="https://sugestaodecompra-sm.web.app/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="25" y="15" width="50" height="35" rx="3"/>
+              <line x1="25" y1="23" x2="75" y2="23"/>
+              <line x1="25" y1="30" x2="75" y2="30"/>
+              <circle cx="50" cy="38" r="6"/>
+              <path d="M45 42 L38 85 L62 85 L55 42"/>
+              <circle cx="50" cy="85" r="7"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">01</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div class="m4-card-title">Sugestão de compra</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Algoritmo de reposição</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 2. Estoque de Peças (Disco de Freio Ventilado Carbono-Cerâmica) -->
+          <a href="https://albertomateus10.github.io/estoquedepecas/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="42"/>
+              <circle cx="50" cy="50" r="26"/>
+              <circle cx="50" cy="50" r="12"/>
+              <circle cx="50" cy="18" r="2" fill="currentColor"/>
+              <circle cx="50" cy="82" r="2" fill="currentColor"/>
+              <circle cx="18" cy="50" r="2" fill="currentColor"/>
+              <circle cx="82" cy="50" r="2" fill="currentColor"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">02</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+            </div>
+            <div class="m4-card-title">Estoque de Peças</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Posição física & saldo</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 3. Peças Vendidas (Engrenagem Helicoidal) -->
+          <a href="https://albertomateus10.github.io/pecasvendidas/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="35"/>
+              <line x1="50" y1="5" x2="50" y2="15" stroke-width="4"/>
+              <line x1="50" y1="85" x2="50" y2="95" stroke-width="4"/>
+              <line x1="5" y1="50" x2="15" y2="50" stroke-width="4"/>
+              <line x1="85" y1="50" x2="95" y2="50" stroke-width="4"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">03</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="m4-card-title">Peças Vendidas</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Faturamento & saída</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 4. Inventário (Paquímetro de Precisão) -->
+          <a href="https://albertomateus10.github.io/inventario/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="25" y="20" width="50" height="65" rx="5"/>
+              <rect x="38" y="12" width="24" height="12" rx="3"/>
+              <line x1="35" y1="40" x2="65" y2="40"/>
+              <line x1="35" y1="55" x2="65" y2="55"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">04</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="m4-card-title">Inventário</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Acuracidade & balanço</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 5. Peças reservadas (Amortecedor Esportivo Coilover) -->
+          <a href="https://albertomateus10.github.io/pecasreservadas/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="12" r="7"/>
+              <path d="M35 34 Q65 39 35 44 Q65 49 35 54 Q65 59 35 64 Q65 69 35 74" fill="none" stroke-width="3"/>
+              <circle cx="50" cy="94" r="6"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">05</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="m4-card-title">Peças reservadas</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">O.S. Oficina & balcão</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 6. Link&Entry (Chave Corporativa Fiat) -->
+          <a href="https://sts.fiatgroup.com/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fuprssaml.fiat.com&wctx=rm%3d0%26id%3dpassive%26ru%3d%252ffiat%252fDefault.aspx%253ftarget%253dhttps%25253A%25252F%25252Flinkentry.fiat.com%2526debug%253d0&wct=2026-07-31T13%3a23%3a38Z&whr=http%3a%2f%2fsts.fiatgroup.com%2fadfs%2fservices%2ftrust" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="40" cy="45" r="22"/>
+              <path d="M56 55 L85 85 L75 95 L65 85 L60 90 L50 80"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">06</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/></svg>
+            </div>
+            <div class="m4-card-title">Link&Entry</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Autenticação Fiat Group</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 7. CSPS (Escudo Peças Oficiais) -->
+          <a href="https://csps.parts.fiat.com/EplusLogin/authenticateUser.do" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M50 15 L85 30 L85 65 C85 80 50 95 50 95 C50 95 15 80 15 65 L15 30 Z"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">07</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="m4-card-title">CSPS</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Pedidos & Garantia Montadora</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 8. Margem de peças (Turbina de Rentabilidade) -->
+          <a href="https://albertomateus10.github.io/calculomargempecas/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="38"/>
+              <path d="M30 65 L45 45 L60 55 L75 35" stroke-width="3"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">08</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            </div>
+            <div class="m4-card-title">Margem de peças</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Markup e lucratividade</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 9. Admin GoParts -->
+          <a href="https://admin.goparts.com.br/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="32"/>
+              <path d="M50 25 L65 45 L45 55 L55 75"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">09</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0"/></svg>
+            </div>
+            <div class="m4-card-title">Admin da GoParts</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">E-commerce e vendas B2B</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 10. Catálogo Epair (Vista Técnica Explodida) -->
+          <a href="https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 25 C20 20 45 15 50 25 C55 15 80 20 80 25 L80 80 C80 80 55 75 50 82 C45 75 20 80 20 80 Z"/>
+              <line x1="50" y1="25" x2="50" y2="82"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">10</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="m4-card-title">Catálogo de Peças - Epair</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Esquemas técnicos oficiais</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 11. Catálogo de Acessórios -->
+          <a href="https://catalogodeacessorios-sm.web.app/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="30"/>
+              <line x1="50" y1="10" x2="50" y2="90"/>
+              <line x1="10" y1="50" x2="90" y2="50"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">✦</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="m4-card-title">Catálogo de Acessórios</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Upgrades & customização</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 12. Abastecer as Filiais -->
+          <a href="https://albertomateus10.github.io/pecasfiliais/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="15" y="30" width="45" height="35" rx="3"/>
+              <path d="M60 40 L78 40 L88 55 L88 65 L60 65 Z"/>
+              <circle cx="32" cy="70" r="8"/>
+              <circle cx="75" cy="70" r="8"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">✦</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div class="m4-card-title">Abastecer as Filiais</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Logística & transferência</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+          <!-- 13. Compras de Peças -->
+          <a href="https://albertomateus10.github.io/comprasdepecas/" target="_blank" class="m4-card">
+            <svg class="m4-card-part-art" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 30 L80 30 L72 65 L28 65 Z"/>
+              <circle cx="38" cy="80" r="8"/>
+              <circle cx="62" cy="80" r="8"/>
+              <path d="M35 45 L50 35 L65 45"/>
+            </svg>
+            <div class="m4-card-head">
+              <span class="m4-key">✦</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <div class="m4-card-title">Compras de Peças</div>
+            <div class="m4-card-bottom">
+              <span class="m4-card-sub">Aquisições & pedidos</span>
+              <svg class="m4-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MOCKUP 5 (NOVO): PRECISION CAD & WIREFRAME (P&D / ENGENHARIA)      -->
+    <!-- ================================================================== -->
+    <div id="mockup5" class="mockup-view m5-wrapper">
+      <div class="m5-container">
+        
+        <header class="m5-header">
+          <div class="m5-header-title">
+            <h1>
+              <!-- Ícone CAD -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+              CENTRAL DE PEÇAS // CAD-SYSTEM
+            </h1>
+            <p>ISO-9001 COMPLIANT // GESTÃO DE ESTOQUE & ACURACIDADE TÉCNICA</p>
+          </div>
+          <div class="m5-cad-coords">
+            STATUS: ATIVO // 13 MÓDULOS CONECTADOS // LATÊNCIA: 0.04ms
+          </div>
+        </header>
+
+        <div class="m5-grid">
+          
+          <a href="https://sugestaodecompra-sm.web.app/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="25" y="15" width="50" height="35"/>
+              <line x1="15" y1="15" x2="25" y2="15"/>
+              <line x1="75" y1="15" x2="85" y2="15"/>
+              <path d="M45 42 L38 85 L62 85 L55 42"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[01]</span>
+              <div>
+                <div class="m5-card-title">Sugestão de compra</div>
+                <div class="m5-card-desc">Reposição Automática</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/estoquedepecas/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="40" stroke-dasharray="3 3"/>
+              <circle cx="50" cy="50" r="20"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[02]</span>
+              <div>
+                <div class="m5-card-title">Estoque de Peças</div>
+                <div class="m5-card-desc">Posição & Saldo Físico</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasvendidas/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="35"/>
+              <line x1="50" y1="5" x2="50" y2="95"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[03]</span>
+              <div>
+                <div class="m5-card-title">Peças Vendidas</div>
+                <div class="m5-card-desc">Fluxo de Saída</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/inventario/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="25" y="20" width="50" height="60"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[04]</span>
+              <div>
+                <div class="m5-card-title">Inventário</div>
+                <div class="m5-card-desc">Auditoria Geral</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasreservadas/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M35 34 Q65 44 35 54 Q65 64 35 74" fill="none"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[05]</span>
+              <div>
+                <div class="m5-card-title">Peças reservadas</div>
+                <div class="m5-card-desc">Ordens de Serviço</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://sts.fiatgroup.com/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fuprssaml.fiat.com&wctx=rm%3d0%26id%3dpassive%26ru%3d%252ffiat%252fDefault.aspx%253ftarget%253dhttps%25253A%25252F%25252Flinkentry.fiat.com%2526debug%253d0&wct=2026-07-31T13%3a23%3a38Z&whr=http%3a%2f%2fsts.fiatgroup.com%2fadfs%2fservices%2ftrust" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="45" cy="45" r="20"/>
+              <path d="M55 55 L80 80"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[06]</span>
+              <div>
+                <div class="m5-card-title">Link&Entry</div>
+                <div class="m5-card-desc">ADFS Fiat Portal</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://csps.parts.fiat.com/EplusLogin/authenticateUser.do" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M50 15 L80 30 L80 70 C80 80 50 90 50 90 Z"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[07]</span>
+              <div>
+                <div class="m5-card-title">CSPS</div>
+                <div class="m5-card-desc">Pedidos & Garantias</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/calculomargempecas/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="35"/>
+              <line x1="30" y1="70" x2="70" y2="30"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[08]</span>
+              <div>
+                <div class="m5-card-title">Margem de peças</div>
+                <div class="m5-card-desc">Cálculo Financeiro</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://admin.goparts.com.br/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="30"/>
+              <rect x="40" y="40" width="20" height="20"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[09]</span>
+              <div>
+                <div class="m5-card-title">Admin GoParts</div>
+                <div class="m5-card-desc">Gestão Multicanal</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M25 25 L50 35 L75 25 L75 75 L50 85 L25 75 Z"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[10]</span>
+              <div>
+                <div class="m5-card-title">Catálogo Epair</div>
+                <div class="m5-card-desc">EPER Parts Fiat</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://catalogodeacessorios-sm.web.app/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="30"/>
+              <line x1="50" y1="20" x2="50" y2="80"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[11]</span>
+              <div>
+                <div class="m5-card-title">Catálogo Acessórios</div>
+                <div class="m5-card-desc">Catálogo Oficial SM</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasfiliais/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="20" y="30" width="50" height="35"/>
+              <circle cx="35" cy="65" r="8"/>
+              <circle cx="65" cy="65" r="8"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[12]</span>
+              <div>
+                <div class="m5-card-title">Abastecer Filiais</div>
+                <div class="m5-card-desc">Distribuição Logística</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+          <a href="https://albertomateus10.github.io/comprasdepecas/" target="_blank" class="m5-card">
+            <svg class="m5-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="25" y="25" width="50" height="50" rx="3"/>
+              <circle cx="50" cy="50" r="15"/>
+            </svg>
+            <div class="m5-card-left">
+              <span class="m5-index-tag">[13]</span>
+              <div>
+                <div class="m5-card-title">Compras de Peças</div>
+                <div class="m5-card-desc">Portal de Aquisições</div>
+              </div>
+            </div>
+            <span style="font-size: 0.7rem; color: #14b8a6;">&rarr;</span>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MOCKUP 6 (NOVO): NORDIC MINIMAL LUXURY (VOLVO & POLESTAR STYLE)    -->
+    <!-- ================================================================== -->
+    <div id="mockup6" class="mockup-view m6-wrapper">
+      <div class="m6-container">
+        
+        <header class="m6-header">
+          <div class="m6-titles">
+            <h1>Central de Peças</h1>
+            <p>Plataforma corporativa de gestão de inventário, suprimentos e sistemas oficiais de reposição automotiva.</p>
+          </div>
+          <div class="m6-meta">
+            <span class="m6-meta-pill">Stellantis & Multi-Marcas</span>
+            <span class="m6-meta-pill" style="background: #0f172a; color: #fff;">13 Plataformas</span>
+          </div>
+        </header>
+
+        <div class="m6-grid">
+          
+          <a href="https://sugestaodecompra-sm.web.app/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="25" y="15" width="50" height="35" rx="3"/>
+              <path d="M45 42 L38 85 L62 85 L55 42"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">01</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Sugestão de compra</div>
+            <div class="m6-card-footer">
+              <span>Planejamento de reposição</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/estoquedepecas/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="42"/>
+              <circle cx="50" cy="50" r="26"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">02</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Estoque de Peças</div>
+            <div class="m6-card-footer">
+              <span>Consulta de saldo e local</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasvendidas/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="35"/>
+              <line x1="50" y1="10" x2="50" y2="90"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">03</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Peças Vendidas</div>
+            <div class="m6-card-footer">
+              <span>Relatório de movimentação</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/inventario/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="25" y="20" width="50" height="60" rx="4"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">04</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Inventário</div>
+            <div class="m6-card-footer">
+              <span>Auditoria e controle físico</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasreservadas/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M35 34 Q65 44 35 54 Q65 64 35 74" fill="none"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">05</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Peças reservadas</div>
+            <div class="m6-card-footer">
+              <span>O.S. Oficina e solicitações</span>
+            </div>
+          </a>
+
+          <a href="https://sts.fiatgroup.com/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fuprssaml.fiat.com&wctx=rm%3d0%26id%3dpassive%26ru%3d%252ffiat%252fDefault.aspx%253ftarget%253dhttps%25253A%25252F%25252Flinkentry.fiat.com%2526debug%253d0&wct=2026-07-31T13%3a23%3a38Z&whr=http%3a%2f%2fsts.fiatgroup.com%2fadfs%2fservices%2ftrust" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="45" cy="45" r="20"/>
+              <path d="M55 55 L80 80"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">06</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Link&Entry</div>
+            <div class="m6-card-footer">
+              <span>Portal oficial Fiat Group</span>
+            </div>
+          </a>
+
+          <a href="https://csps.parts.fiat.com/EplusLogin/authenticateUser.do" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M50 15 L80 30 L80 70 C80 80 50 90 50 90 Z"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">07</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">CSPS (Fiat Parts)</div>
+            <div class="m6-card-footer">
+              <span>Garantia & pedidos de fábrica</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/calculomargempecas/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="35"/>
+              <line x1="30" y1="70" x2="70" y2="30"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">08</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Margem de peças</div>
+            <div class="m6-card-footer">
+              <span>Rentabilidade operacional</span>
+            </div>
+          </a>
+
+          <a href="https://admin.goparts.com.br/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="32"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">09</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Admin da GoParts</div>
+            <div class="m6-card-footer">
+              <span>Console de e-commerce</span>
+            </div>
+          </a>
+
+          <a href="https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M25 25 L50 35 L75 25 L75 75 L50 85 L25 75 Z"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">10</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Catálogo Epair</div>
+            <div class="m6-card-footer">
+              <span>Visualização técnica de catálogo</span>
+            </div>
+          </a>
+
+          <a href="https://catalogodeacessorios-sm.web.app/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="50" cy="50" r="30"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">11</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Catálogo de Acessórios</div>
+            <div class="m6-card-footer">
+              <span>Linha completa de personalização</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/pecasfiliais/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="20" y="30" width="50" height="35" rx="3"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">12</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Abastecer as Filiais</div>
+            <div class="m6-card-footer">
+              <span>Distribuição e requisições</span>
+            </div>
+          </a>
+
+          <a href="https://albertomateus10.github.io/comprasdepecas/" target="_blank" class="m6-card">
+            <svg class="m6-part-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M25 35 L75 35 L68 70 L32 70 Z"/>
+              <circle cx="40" cy="82" r="6"/>
+              <circle cx="60" cy="82" r="6"/>
+            </svg>
+            <div class="m6-card-header">
+              <span class="m6-shortcut-badge">13</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div class="m6-card-title">Compras de Peças</div>
+            <div class="m6-card-footer">
+              <span>Gestão de aquisição e pedidos</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- MOCKUP 1: EXECUTIVE DARK BLUEPRINT                                  -->
+    <!-- ================================================================== -->
+    <div id="mockup1" class="mockup-view m1-wrapper active">
+      <svg class="tech-bg-piece p1" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="100" cy="100" r="90" stroke-dasharray="6 3"/>
+        <circle cx="100" cy="100" r="82"/>
+        <circle cx="100" cy="100" r="54"/>
+        <circle cx="100" cy="100" r="30"/>
+        <circle cx="100" cy="30" r="2.5" fill="currentColor"/>
+        <circle cx="100" cy="40" r="2.5" fill="currentColor"/>
+        <path d="M140 30 C180 50, 195 90, 185 130 L160 120 C168 95, 158 65, 130 50 Z" fill="rgba(59, 130, 246, 0.15)" stroke-width="2"/>
+      </svg>
+
+      <svg class="tech-bg-piece p2" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.3">
+        <path d="M100 20 C150 20, 185 55, 185 105 C185 155, 145 185, 95 185 C45 185, 15 145, 15 95 C15 50, 50 40, 75 40 L75 10 L125 10 L125 35" />
+        <circle cx="100" cy="105" r="48"/>
+      </svg>
+
+      <div class="m1-container">
+        <header class="m1-header">
+          <div class="m1-brand">
+            <div class="m1-logo-box">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </div>
+            <div class="m1-titles">
+              <h1>Central de Peças <span style="font-size: 0.8rem; font-weight: 600; padding: 2px 8px; border-radius: 6px; background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(147, 197, 253, 0.2);">HUB OPERACIONAL</span></h1>
+              <p>Plataforma Integrada de Gestão de Estoque, Catálogos & Suprimentos Automotivos</p>
+            </div>
+          </div>
+
+          <div class="m1-status-bar">
+            <div class="status-item">
+              <span class="status-dot"></span>
+              <span>13 Módulos Ativos</span>
+            </div>
+            <div class="status-item" style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 14px;">
+              <span style="color: #94a3b8; font-size: 0.76rem;">Atalhos: [1-9] e [0]</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="m1-category-group">
+          <div class="m1-category-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            Módulos Principais do Sistema
+          </div>
+          <div class="m1-grid">
+            
+            <a href="https://sugestaodecompra-sm.web.app/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="25" y="15" width="50" height="35" rx="3"/>
+                <circle cx="50" cy="38" r="6"/>
+                <path d="M45 42 L38 85 L62 85 L55 42"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">1</span>
+                <div>
+                  <div class="m1-card-title">Sugestão de compra</div>
+                  <div class="m1-card-desc">Reposição inteligente</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/estoquedepecas/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="42"/>
+                <circle cx="50" cy="50" r="26"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">2</span>
+                <div>
+                  <div class="m1-card-title">Estoque de Peças</div>
+                  <div class="m1-card-desc">Consulta e saldo físico</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/pecasvendidas/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="35"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">3</span>
+                <div>
+                  <div class="m1-card-title">Peças Vendidas</div>
+                  <div class="m1-card-desc">Histórico e saídas</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/inventario/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="25" y="20" width="50" height="65" rx="5"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">4</span>
+                <div>
+                  <div class="m1-card-title">Inventário</div>
+                  <div class="m1-card-desc">Auditoria e acuracidade</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/pecasreservadas/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="12" r="7"/>
+                <path d="M35 34 Q65 39 35 44 Q65 49 35 54 Q65 59 35 64 Q65 69 35 74" fill="none" stroke-width="3"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">5</span>
+                <div>
+                  <div class="m1-card-title">Peças reservadas</div>
+                  <div class="m1-card-desc">Ordens de serviço e balcão</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://sts.fiatgroup.com/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fuprssaml.fiat.com&wctx=rm%3d0%26id%3dpassive%26ru%3d%252ffiat%252fDefault.aspx%253ftarget%253dhttps%25253A%25252F%25252Flinkentry.fiat.com%2526debug%253d0&wct=2026-07-31T13%3a23%3a38Z&whr=http%3a%2f%2fsts.fiatgroup.com%2fadfs%2fservices%2ftrust" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="40" cy="45" r="22"/>
+                <path d="M56 55 L85 85 L75 95 L65 85 L60 90 L50 80"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">6</span>
+                <div>
+                  <div class="m1-card-title">Link&Entry</div>
+                  <div class="m1-card-desc">Acesso corporativo Fiat</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://csps.parts.fiat.com/EplusLogin/authenticateUser.do" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M50 15 L85 30 L85 65 C85 80 50 95 50 95 C50 95 15 80 15 65 L15 30 Z"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">7</span>
+                <div>
+                  <div class="m1-card-title">CSPS</div>
+                  <div class="m1-card-desc">Pedidos & Garantia Fiat</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/calculomargempecas/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="38"/>
+                <path d="M30 65 L45 45 L60 55 L75 35" stroke-width="3"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">8</span>
+                <div>
+                  <div class="m1-card-title">Margem de peças</div>
+                  <div class="m1-card-desc">Rentabilidade e markup</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://admin.goparts.com.br/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="35"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">9</span>
+                <div>
+                  <div class="m1-card-title">Admin da GoParts</div>
+                  <div class="m1-card-desc">Painel e-commerce & B2B</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://eper-ltm.parts.fiat.com/navi?KEY=STARTUP" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 25 C20 20 45 15 50 25 C55 15 80 20 80 25 L80 80 C80 80 55 75 50 82 C45 75 20 80 20 80 Z"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">0</span>
+                <div>
+                  <div class="m1-card-title">Catálogo de Peças - Epair</div>
+                  <div class="m1-card-desc">Vista explodida técnica</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://catalogodeacessorios-sm.web.app/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="30"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">✦</span>
+                <div>
+                  <div class="m1-card-title">Catálogo de Acessórios</div>
+                  <div class="m1-card-desc">Personalização & upgrades</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/pecasfiliais/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="15" y="30" width="45" height="35" rx="3"/>
+                <circle cx="32" cy="70" r="8"/>
+                <circle cx="75" cy="70" r="8"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">✦</span>
+                <div>
+                  <div class="m1-card-title">Abastecer as Filiais</div>
+                  <div class="m1-card-desc">Logística e transferência</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+            <a href="https://albertomateus10.github.io/comprasdepecas/" target="_blank" class="m1-card">
+              <svg class="m1-card-part-bg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M25 35 L75 35 L68 70 L32 70 Z"/>
+                <circle cx="40" cy="82" r="6"/>
+                <circle cx="60" cy="82" r="6"/>
+              </svg>
+              <div class="m1-card-left">
+                <span class="m1-key-badge">✦</span>
+                <div>
+                  <div class="m1-card-title">Compras de Peças</div>
+                  <div class="m1-card-desc">Aquisição e pedidos de reposição</div>
+                </div>
+              </div>
+              <svg class="m1-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Outros mockups permanecem acessíveis via abas 2 e 3 -->
+    <div id="mockup2" class="mockup-view m6-wrapper">
+      <div class="m6-container" style="text-align: center; padding: 60px 0;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px;">Opção 2: Executive Clean (Ambiente Claro)</h2>
+        <p style="color: #64748b; margin-bottom: 30px;">Disponível com visual corporativo claro e cards com elevação sutil.</p>
+        <button class="tab-btn active" style="margin: 0 auto;" onclick="switchMockup(1)">Voltar para Opção 1</button>
+      </div>
+    </div>
+
+    <div id="mockup3" class="mockup-view m5-wrapper">
+      <div class="m5-container" style="text-align: center; padding: 60px 0;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: #2dd4bf;">Opção 3: Dynamic Tech Hub</h2>
+        <p style="color: #99f6e4; margin-bottom: 30px;">Console dinâmico com badges técnicas.</p>
+        <button class="tab-btn active" style="margin: 0 auto;" onclick="switchMockup(4)">Ver Opção 4 (Rosso Corsa)</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Rodapé com Análise dos Mockups para a Diretoria -->
+  <footer class="comparison-drawer">
+    <div class="drawer-content">
+      <div class="drawer-box">
+        <h4><span class="highlight">Opção 1:</span> Dark Blueprint Tech</h4>
+        <p>Inspirada na engenharia de montadoras. Traz desenhos técnicos em marca d'água técnica suave e cockpit azul executivo.</p>
+      </div>
+      <div class="drawer-box">
+        <h4><span class="highlight-red">Opção 4:</span> Rosso Corsa & Carbon (Destaque)</h4>
+        <p>Estilo esportivo corporativo e institucional Stellantis. Fibra de carbono refinada, detalhes em vermelho rubi e desenho de virabrequim/motor.</p>
+      </div>
+      <div class="drawer-box">
+        <h4><span class="highlight-teal">Opção 5:</span> Precision CAD System</h4>
+        <p>Estilo centro de desenvolvimento de peças com malha técnica milimétrica e estética futurista de alta precisão.</p>
+      </div>
+      <div class="drawer-box">
+        <h4><span class="highlight">Opção 6:</span> Nordic Minimal Luxury</h4>
+        <p>Minimalismo escandinavo corporativo claro (estilo Volvo/Polestar), transmitindo organização e governança de ponta.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchMockup(num) {
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      document.querySelectorAll('.mockup-view').forEach((view) => {
+        view.classList.remove('active');
+      });
+      const targetView = document.getElementById('mockup' + num);
+      if (targetView) targetView.classList.add('active');
+    }
+  </script>
+</body>
+</html>

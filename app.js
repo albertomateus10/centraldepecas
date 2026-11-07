@@ -59,6 +59,11 @@ const SYSTEMS = [
     id: 12,
     name: "Abastecer as Filiais",
     url: "https://albertomateus10.github.io/pecasfiliais/"
+  },
+  {
+    id: 13,
+    name: "Compras de Peças",
+    url: "https://albertomateus10.github.io/comprasdepecas/"
   }
 ];
 
